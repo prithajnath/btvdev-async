@@ -1,7 +1,7 @@
 import asyncio
 import aiohttp
 import json
-
+import sys
 from random import randint
 
 API_URL = "https://0bdwnj5rj7.execute-api.us-east-1.amazonaws.com/prod"
@@ -17,7 +17,8 @@ async def call_factor_API(session,num, data):
         print(f"{num} can be factored into : {', '.join(all_factors)}")
 
 async def main():
-    N = int(input("How many numbers to factor?"))
+    #N = int(input("How many numbers to factor?"))
+    N = int(sys.argv[1])
     numbers = [randint(5000, 10000) for _ in range(N)]
     tasks = []
     async with aiohttp.ClientSession() as session:

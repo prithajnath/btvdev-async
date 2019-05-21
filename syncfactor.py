@@ -1,8 +1,10 @@
 from random import randint
 import json
+import sys
 import requests as r
 
-N = int(input("How many numbers to factor?: "))
+#N = int(input("How many numbers to factor?: "))
+N = int(sys.argv[1])
 numbers = [randint(5000,10000) for _ in range(N)]
 API_URL = "https://0bdwnj5rj7.execute-api.us-east-1.amazonaws.com/prod"
 
