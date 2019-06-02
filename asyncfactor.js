@@ -8,19 +8,18 @@ async function callFactorAPI(num, data){
      url: API_URL,
      data: data
   });
-  console.log(`${num} can be factored into ${JSON.parse(result.data.body).result} \n`);
-  //console.log(result.data)
+  return JSON.parse(result.data.body).result
 }
 
 (async function(){
  var N = parseInt(process.argv.slice(2)[0]);
  var numsToFactor = Object.keys([...Array(N)]).map(x => Math.floor(Math.random() * 5000) + 5000);
- //console.log("numsToFactor : ", numsToFactor)
  try{
- await Promise.all(numsToFactor.map(num => callFactorAPI(num, {number:num})));
+ var factoredValues = await Promise.all(numsToFactor.map(num => callFactorAPI(num, {number:num})));
  }catch(e){
   console.log(e);
  }
- //var factor = await callFactorAPI(N, {number:N});
-
+ Object.keys(numsToFactor).forEach(n => {
+   console.log(`${numsToFactor[n]} can be factored into ${factoredValues[n]}`);
+ });
 })();
